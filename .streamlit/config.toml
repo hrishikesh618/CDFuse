@@ -1,0 +1,19 @@
+[server]
+headless = true
+# Uploads are held in memory, so keep this in step with the host's RAM.
+maxUploadSize = 500
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#147D92"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F2F7F8"
+textColor = "#18323A"
+font = "sans serif"
+
+[client]
+showErrorDetails = false
+toolbarMode = "minimal"

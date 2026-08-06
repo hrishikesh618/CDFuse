@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "CDFuse: a browser-based tool for comparing gridded NetCDF datasets"
+message: "If you use this software in your research, please cite it as below."
+type: software
+authors:
+  - family-names: Singh
+    given-names: Hrishikesh
+    affiliation: "Department of Water Resources Development and Management, Indian Institute of Technology Roorkee"
+repository-code: "https://github.com/hrishikesh618/CDFuse"
+abstract: >-
+  CDFuse compares two gridded NetCDF datasets. It aligns a candidate dataset
+  against a reference dataset in time and space, calculates cell-wise
+  performance metrics (Correlation, NSE, KGE, PBIAS, RMSE, MAE and Bias),
+  renders maps, and exports reproducible outputs as PNG, NetCDF, GeoTIFF and
+  CSV. The tool is dataset-neutral: no product-specific timestamp or
+  accumulation conventions are assumed, and every such adjustment is left under
+  explicit user control.
+keywords:
+  - netcdf
+  - gridded data
+  - model evaluation
+  - validation metrics
+  - xarray
+  - hydrology
+  - climate
+license: MIT
+version: 1.0.0
+date-released: "2026-08-06"

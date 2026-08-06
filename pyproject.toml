@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdfuse"
+version = "1.0.0"
+description = "Compare two gridded NetCDF datasets: align, score, map and export."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Hrishikesh Singh" }]
+keywords = ["netcdf", "xarray", "validation", "gridded-data", "hydrology", "climate"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
+
+[project.urls]
+Homepage = "https://github.com/hrishikesh618/CDFuse"
+Issues = "https://github.com/hrishikesh618/CDFuse/issues"
+
+[tool.setuptools]
+packages = ["cdfuse"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+  # All-NaN slices are an expected input; the metrics mask those cells on purpose.
+  "ignore:Degrees of freedom <= 0:RuntimeWarning",
+  "ignore:Mean of empty slice:RuntimeWarning",
+  "ignore:All-NaN slice encountered:RuntimeWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]

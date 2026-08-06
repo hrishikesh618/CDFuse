@@ -1,0 +1,16 @@
+.git/
+.github/
+.venv/
+.cdfuse-testenv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+tests/
+docs/
+*.nc
+*.nc4
+*.cdf
+*.tif
+outputs/
+.streamlit/secrets.toml
