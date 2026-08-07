@@ -28,7 +28,9 @@ def test_safe_name_strips_unsafe_characters():
 
 def test_metric_to_netcdf_roundtrips(metric_field, tmp_path):
     payload = export.metric_to_netcdf(metric_field, "Bias", {"Aggregation": "Daily (Mean)"})
-    assert isinstance(payload, bytes) and payload[:3] == b"CDF" or payload[:4] == b"\x89HDF"
+    assert isinstance(payload, bytes)
+    # Either classic NetCDF ("CDF") or the HDF5-based NetCDF4 container.
+    assert payload[:3] == b"CDF" or payload[:4] == b"\x89HDF", "not a NetCDF container"
 
     path = tmp_path / "bias.nc"
     path.write_bytes(payload)

@@ -34,5 +34,21 @@ jobs:
       - name: Run tests
         run: pytest -v
 
-      - name: Check the Streamlit entrypoint imports cleanly
+      - name: Smoke-test the package
+        # Importing every module catches missing imports that unit tests can
+        # miss, and asserts the rioxarray accessor is actually registered —
+        # without it, boundary clipping and GeoTIFF export fail at runtime.
+        run: |
+          python - <<'PY'
+          import xarray as xr
+
+          import cdfuse
+          from cdfuse import config, export, io, metrics, pipeline, plotting, preprocess, sample
+
+          assert hasattr(xr.DataArray([1.0]), "rio"), "rioxarray accessor is not registered"
+          assert set(metrics.METRIC_FUNCTIONS) >= set(config.DEFAULT_METRICS)
+          print(f"cdfuse {cdfuse.__version__} imported; cartopy={plotting.CARTOPY_AVAILABLE}")
+          PY
+
+      - name: Check the Streamlit entrypoint parses
         run: python -c "import ast, pathlib; ast.parse(pathlib.Path('app.py').read_text(encoding='utf-8'))"

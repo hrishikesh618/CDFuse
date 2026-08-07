@@ -28,6 +28,10 @@ packages = ["cdfuse"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+# Put the repository root on sys.path so `pytest` finds the cdfuse package
+# without an editable install. Bare `pytest` does not add the working
+# directory the way `python -m pytest` does, and CI runs the bare form.
+pythonpath = ["."]
 filterwarnings = [
   # All-NaN slices are an expected input; the metrics mask those cells on purpose.
   "ignore:Degrees of freedom <= 0:RuntimeWarning",
