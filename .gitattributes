@@ -1,0 +1,23 @@
+# Normalise line endings so the repository stays consistent across platforms.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary formats must never be converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.nc binary
+*.nc4 binary
+*.cdf binary
+*.tif binary
+*.tiff binary
+*.zip binary
+*.gpkg binary
+
+# Keep generated and vendored paths out of language statistics.
+docs/* linguist-documentation
