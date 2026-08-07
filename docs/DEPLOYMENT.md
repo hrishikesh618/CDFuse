@@ -28,7 +28,9 @@ Free, purpose-built for exactly this, and it redeploys on every push.
 
 ### Steps
 
-1. **Push the repository.**
+1. **Make sure the code is on GitHub.** The canonical repository is already
+   published at <https://github.com/hrishikesh618/CDFuse>. If you are deploying a
+   fork or a copy, push it first:
 
    ```bash
    cd CDFuse
@@ -36,13 +38,13 @@ Free, purpose-built for exactly this, and it redeploys on every push.
    git add .
    git commit -m "Initial commit: CDFuse v1.0.0"
    git branch -M main
-   git remote add origin https://github.com/hrishikesh618/CDFuse.git
+   git remote add origin https://github.com/<your-account>/CDFuse.git
    git push -u origin main
    ```
 
 2. Go to **<https://share.streamlit.io>** and sign in with GitHub.
 
-3. Click **New app** → **Deploy a public app from GitHub**.
+3. Click **Create app** → choose **Deploy a public app from GitHub**.
 
 4. Fill in:
 
