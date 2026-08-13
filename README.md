@@ -209,6 +209,14 @@ some hosts. Without it, CDFuse draws the same maps on plain matplotlib axes.
 
 ## Limits and privacy
 
+> [!NOTE]
+> **The hosted app sleeps when idle.** Streamlit Community Cloud suspends apps
+> that have had no visitors for a while. If <https://cdfuse.streamlit.app> shows a
+> "Zzzz" screen, click **Yes, get this app back up** and wait roughly a minute
+> while the container restarts. This is normal free-tier behaviour, not a fault,
+> and it affects only the hosted instance — running CDFuse locally or from the
+> `Dockerfile` has no such limit.
+
 Datasets are loaded fully into memory, so CDFuse suits small to moderate grids.
 Crop, coarsen or subset very large files first. The interface warns above roughly
 150 MB per variable, and the upload cap is 500 MB (`.streamlit/config.toml`).

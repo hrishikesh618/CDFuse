@@ -69,8 +69,32 @@ Free, purpose-built for exactly this, and it redeploys on every push.
 ### Resource limits
 
 Community Cloud gives roughly **1 GB of RAM** per app. Since CDFuse loads datasets
-into memory, aim for files in the tens of megabytes. Apps sleep after inactivity and
-wake on the next visit (a few seconds' delay).
+into memory, aim for files in the tens of megabytes.
+
+### Keeping the app awake
+
+Community Cloud suspends an app once it has gone a while without visitors. The next
+person to open it sees a **"Zzzz — this app has gone to sleep due to inactivity"**
+screen with a button to wake it, which takes roughly a minute while the container
+restarts.
+
+This is deliberate platform behaviour. There is **no setting in the app or
+`.streamlit/config.toml` that disables it.** Three ways to handle it:
+
+1. **Set expectations (recommended).** Note on the page that links to the app that a
+   first visit after a quiet spell may need a moment. Visitors are never blocked —
+   anyone can press the wake button. In practice a tool with steady traffic rarely
+   sleeps.
+2. **Ping it externally.** An uptime service (UptimeRobot, cron-job.org) requesting
+   the URL every few hours keeps it from idling out. It works, but it consumes free
+   shared infrastructure to serve nobody, and Streamlit discourages it. Weigh that
+   before doing it on a publicly attributed app.
+3. **Host it somewhere that stays up.** Hugging Face Spaces is free with a more
+   generous idle window; Fly.io, Render and Railway offer always-on instances for a
+   few dollars a month; an institutional server costs nothing but admin time. All
+   three can use the `Dockerfile` in this repository.
+
+Self-hosted deployments (Docker, VPS, institutional server) never sleep.
 
 ### Linking it from your website
 
@@ -193,7 +217,8 @@ it already includes GDAL, GEOS and PROJ.
 | Maps have no coastlines | Cartopy is not installed. Optional — `pip install cartopy` to enable them. |
 | Boundary rejected for a missing CRS | The shapefile has no `.prj`. Include every component, or upload a GeoJSON. |
 | Blank maps after enabling clipping | The boundary does not overlap the data. CDFuse reports the two extents so they can be compared. |
-| First visit is slow | The app was asleep. Normal on free tiers. |
+| "Zzzz — this app has gone to sleep" | Normal free-tier behaviour after a spell with no visitors. Anyone can click **Yes, get this app back up**; it takes about a minute. It cannot be disabled from the app or `config.toml` — see [Keeping the app awake](#keeping-the-app-awake) if that matters for your audience. |
+| First visit is slow | The app was waking from sleep, or the container had just restarted. Normal on free tiers. |
 
 ---
 
